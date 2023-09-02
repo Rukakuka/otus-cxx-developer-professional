@@ -1,1 +1,1 @@
-# Шаблон настройки GitHub Actions
+Выполненные ДЗ в рамках курса Otus C++ Developer. Professional
