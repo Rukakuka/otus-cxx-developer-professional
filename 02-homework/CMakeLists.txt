@@ -40,22 +40,16 @@ install(TARGETS ip_filter
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
-# set(CPACK_GENERATOR DEB)
+set(CPACK_GENERATOR DEB)
 
-# set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
-# set(CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
-# set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
+set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
+set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
 
-# set(CPACK_PACKAGE_CONTACT example@example.com)
+set(CPACK_PACKAGE_CONTACT example@example.com)
 
-# include(CPack)
+include(CPack)
 
 # Describe unit tests
 enable_testing()
 add_unit_test(test/test_version.cpp version)
-
-# Packaging
-option(MAKE_PACKAGE "Add 'package' and 'package_source' build targets for packages" ON)
-if (MAKE_PACKAGE)
-	add_subdirectory(cmake/packaging)
-endif()
