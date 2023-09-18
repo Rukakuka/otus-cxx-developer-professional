@@ -56,7 +56,8 @@ jobs:
       - run: |
           cd 02-homework
           sudo apt-get update && sudo apt-get install cmake libgtest-dev -y
-          cmake . -DPROJECT_REVISION=${{ github.run_number }}
+          mkdir -p build && cd build/
+          cmake -DPROJECT_REVISION=${{ github.run_number }} ../
           cmake --build .
           cmake --build . --target test
           cmake --build . --target package
