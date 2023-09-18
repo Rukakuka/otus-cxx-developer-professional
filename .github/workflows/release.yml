@@ -55,7 +55,7 @@ jobs:
           submodules: true
       - run: |
           cd 02-homework
-          sudo apt-get update && sudo apt-get install cmake libboost-test-dev -y
+          sudo apt-get update && sudo apt-get install cmake libgtest-test-dev -y
           mkdir -p build && cd build/
           cmake -DPATCH_VERSION=${{ github.run_number }} -DCMAKE_BUILD_TYPE=Release ../
           cmake --build .
