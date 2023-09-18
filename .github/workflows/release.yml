@@ -31,7 +31,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: hw-01-${{ github.run_number }}
-          release_name: Release ${{ github.run_number }}
+          release_name: Release 01-homework ${{ github.run_number }}
           draft: false
           prerelease: false
 
@@ -44,4 +44,43 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./01-homework/helloworld-0.0.${{ github.run_number }}-Linux.deb
           asset_name: helloworld-0.0.${{ github.run_number }}-Linux.deb
+          asset_content_type: application/vnd.debian.binary-package
+
+  build-02-homework:
+    runs-on: ubuntu-20.04
+    permissions: write-all
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - run: |
+          cd 02-homework
+          sudo apt-get update && sudo apt-get install cmake libboost-test-dev -y
+          mkdir -p build && cd build/
+          cmake -DPATCH_VERSION=${{ github.run_number }} -DCMAKE_BUILD_TYPE=Release ../
+          cmake --build .
+          cmake --build . --target test
+          cmake --build . --target package
+        name: Build
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: hw-02-${{ github.run_number }}
+          release_name: Release 02-homework ${{ github.run_number }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset HW2
+        id: upload-release-asset-2
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./02-homework/ip_filter-0.0.${{ github.run_number }}-Linux.deb
+          asset_name: ip_filter-0.0.${{ github.run_number }}-Linux.deb
           asset_content_type: application/vnd.debian.binary-package
