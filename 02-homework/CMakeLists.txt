@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
 
 set(PROJECT_REVISION 1 CACHE INTERNAL "Project revision (CI)")
+set(PROJECT_VESRION 0.0.${PROJECT_REVISION})
+
 project(cmake_template
     VERSION 0.0.${PROJECT_REVISION}
     DESCRIPTION "02-homework"
