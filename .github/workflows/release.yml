@@ -61,6 +61,7 @@ jobs:
           cmake --build .
           cmake --build . --target test
           cmake --build . --target package
+          cd ..
         name: Build
 
       - name: Create Release
