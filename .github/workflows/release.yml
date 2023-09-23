@@ -1,60 +1,45 @@
-name: 'C++ CI'
+name: "C++ CI"
 
 on:
   push:
     branches:
       - main
+      - testing
       - feature/github_actions
   workflow_dispatch:
 
 jobs:
-  build-01-homework:
+  ci:
     runs-on: ubuntu-20.04
     permissions: write-all
     steps:
+      # 01-homework
       - uses: actions/checkout@v3
         with:
           submodules: true
-      - run: |
-          cd 01-homework
+      - name: Build
+        run: |
+          cd ./01-homework
           sudo apt-get update && sudo apt-get install cmake libboost-test-dev -y
-          cmake . -DPATCH_VERSION=${{ github.run_number }}
+          mkdir -p build && cd build/
+          cmake -DPATCH_VERSION=${{ github.run_number }} ../
           cmake --build .
           cmake --build . --target test
           cmake --build . --target package
-        name: Build
-
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          cd ..
+      - name: Save built artifacts
+        uses: actions/upload-artifact@v3
         with:
-          tag_name: hw-01-${{ github.run_number }}
-          release_name: Release 01-homework ${{ github.run_number }}
-          draft: false
-          prerelease: false
+          name: helloworld-0.0.${{ github.run_number }}-Linux.deb
+          path: ./01-homework/build/helloworld-0.0.${{ github.run_number }}-Linux.deb
 
-      - name: Upload Release Asset HW1
-        id: upload-release-asset-1
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./01-homework/helloworld-0.0.${{ github.run_number }}-Linux.deb
-          asset_name: helloworld-0.0.${{ github.run_number }}-Linux.deb
-          asset_content_type: application/vnd.debian.binary-package
-
-  build-02-homework:
-    runs-on: ubuntu-20.04
-    permissions: write-all
-    steps:
+      #02-homework
       - uses: actions/checkout@v3
         with:
           submodules: true
-      - run: |
-          cd 02-homework
+      - name: Build
+        run: |
+          cd ./02-homework
           sudo apt-get update && sudo apt-get install cmake libgtest-dev -y
           mkdir -p build && cd build/
           cmake -DPROJECT_REVISION=${{ github.run_number }} ../
@@ -62,26 +47,27 @@ jobs:
           cmake --build . --target test
           cmake --build . --target package
           cd ..
-        name: Build
-
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
+      - name: Save built artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ip_filter-0.0.${{ github.run_number }}-Linux.deb
+          path: ./02-homework/build/ip_filter-0.0.${{ github.run_number }}-Linux.deb
+      
+      # Release
+      - uses: actions/download-artifact@v3
+        with:
+          name: helloworld-0.0.${{ github.run_number }}-Linux.deb
+      - uses: actions/download-artifact@v3
+        with:
+          name: ip_filter-0.0.${{ github.run_number }}-Linux.deb
+      - name: Release
+        run: |
+          set -x
+          assets=()
+          for asset in *.deb; do
+            assets+=("-a" "$asset")
+          done
+          tag_name="${GITHUB_REF##*/}"
+          hub release create "${assets[@]}" -m "Release ${{ github.run_number }}" "${{ github.run_number }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: hw-02-${{ github.run_number }}
-          release_name: Release 02-homework ${{ github.run_number }}
-          draft: false
-          prerelease: false
-
-      - name: Upload Release Asset HW2
-        id: upload-release-asset-2
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./02-homework/build/ip_filter-0.0.${{ github.run_number }}-Linux.deb
-          asset_name: ip_filter-0.0.${{ github.run_number }}-Linux.deb
-          asset_content_type: application/vnd.debian.binary-package
