@@ -27,21 +27,11 @@ jobs:
           cmake --build . --target test
           cmake --build . --target package
           cd ..
-      - uses: actions/upload-artifact@v3
+      - name: Save built artifacts
+        uses: actions/upload-artifact@v3
         with:
           name: helloworld-0.0.${{ github.run_number }}-Linux.deb
           path: ./01-homework/build/helloworld-0.0.${{ github.run_number }}-Linux.deb
-
-      # - name: Create Release
-      #   id: create_release
-      #   uses: actions/create-release@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     tag_name: hw-01-${{ github.run_number }}
-      #     release_name: Release 01-homework ${{ github.run_number }}
-      #     draft: false
-      #     prerelease: false
 
       #02-homework
       - uses: actions/checkout@v3
@@ -57,32 +47,13 @@ jobs:
           cmake --build . --target test
           cmake --build . --target package
           cd ..
-      - uses: actions/upload-artifact@v3
+      - name: Save built artifacts
+        uses: actions/upload-artifact@v3
         with:
           name: ip_filter-0.0.${{ github.run_number }}-Linux.deb
           path: ./02-homework/build/ip_filter-0.0.${{ github.run_number }}-Linux.deb
-
-      # - name: Create Release
-      #   id: create_release-02
-      #   uses: actions/create-release@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     tag_name: hw-02-${{ github.run_number }}
-      #     release_name: Release 02-homework ${{ github.run_number }}
-      #     draft: false
-      #     prerelease: false
-
-      # - name: Upload Release Assets
-      #   id: upload-release-assets
-      #   uses: actions/upload-release-asset@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
-      #     asset_path: ./01-homework/helloworld-0.0.${{ github.run_number }}-Linux.deb
-      #     asset_name: helloworld-0.0.${{ github.run_number }}-Linux.deb
-      #     asset_content_type: application/vnd.debian.binary-package
+      
+      # Release
       - uses: actions/download-artifact@v3
         with:
           name: helloworld-0.0.${{ github.run_number }}-Linux.deb
@@ -97,7 +68,7 @@ jobs:
             assets+=("-a" "$asset")
           done
           tag_name="${GITHUB_REF##*/}"
-          hub release create "${assets[@]}" -m "$tag_name" "$tag_name"
+          hub release create "${assets[@]}" -m "MESSAGE" "TAG"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
