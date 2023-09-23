@@ -80,7 +80,9 @@ jobs:
           pwd
           set -x
           assets=()
-          assets+=("-a" "./01-homework/build/helloworld-0.0.${{ github.run_number }}-Linux.deb")
+          ls ./01-homework/build
+          /home/runner/work/otus-cxx-developer-professional/otus-cxx-developer-professional/01-homework/build/helloworld-0.0.33-Linux.deb
+          assets+=("-a" "./ 01-homework/build/helloworld-0.0.${{ github.run_number }}-Linux.deb")
           assets+=("-a" "./02-homework/build/ip_filter-0.0.${{ github.run_number }}-Linux.deb")
           tag_name="${GITHUB_REF##*/}"
           hub release create "${assets[@]}" -m "$tag_name" "$tag_name"
