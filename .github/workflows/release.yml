@@ -76,10 +76,11 @@ jobs:
       #     asset_content_type: application/vnd.debian.binary-package
       - name: Release assets
         run: |
+          pwd
           set -x
           assets=()
-          assets+=("-a" "01-homework/helloworld-0.0.${{ github.run_number }}-Linux.deb")
-          assets+=("-a" "02-homework/build/ip_filter-0.0.${{ github.run_number }}-Linux.deb")
+          assets+=("-a" "./01-homework/helloworld-0.0.${{ github.run_number }}-Linux.deb")
+          assets+=("-a" "./02-homework/build/ip_filter-0.0.${{ github.run_number }}-Linux.deb")
           tag_name="${GITHUB_REF##*/}"
           hub release create "${assets[@]}" -m "$tag_name" "$tag_name"
         env:
