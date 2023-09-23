@@ -1,4 +1,4 @@
-name: 'C++ CI'
+name: "C++ CI"
 
 on:
   push:
@@ -34,17 +34,11 @@ jobs:
           release_name: Release 01-homework ${{ github.run_number }}
           draft: false
           prerelease: false
-
-      - name: Upload Release Asset HW1
-        id: upload-release-asset-1
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Save built artifact
+        uses: actions/upload-artifact@master
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./01-homework/helloworld-0.0.${{ github.run_number }}-Linux.deb
-          asset_name: helloworld-0.0.${{ github.run_number }}-Linux.deb
-          asset_content_type: application/vnd.debian.binary-package
+          name: 01-homework-deb
+          path: ./01-homework/helloworld-0.0.${{ github.run_number }}-Linux.deb
 
   build-02-homework:
     runs-on: ubuntu-20.04
@@ -74,14 +68,50 @@ jobs:
           release_name: Release 02-homework ${{ github.run_number }}
           draft: false
           prerelease: false
+      - name: Save built artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: 02-homework-deb
+          path: ./02-homework/build/ip_filter-0.0.${{ github.run_number }}-Linux.deb
 
-      - name: Upload Release Asset HW2
-        id: upload-release-asset-2
-        uses: actions/upload-release-asset@v1
+  upload-assets:
+    runs-on: ubuntu-20.04
+    steps:
+      # - uses: actions/checkout@master
+      # - uses: actions/download-artifact@master
+      #   with:
+      #     name: 01-homework-deb
+      #     path: ./01-homework/helloworld-0.0.${{ github.run_number }}-Linux.deb
+      # - run: cat path/to/artifact/world.txt
+
+      # - name: Upload Release Assets
+      #   id: upload-release-assets
+      #   uses: actions/upload-release-asset@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #     asset_path: ./01-homework/helloworld-0.0.${{ github.run_number }}-Linux.deb
+      #     asset_name: helloworld-0.0.${{ github.run_number }}-Linux.deb
+      #     asset_content_type: application/vnd.debian.binary-package
+
+      - run: |
+          set -x
+          assets=()
+          assets+=("-a" "01-homework/helloworld-0.0.${{ github.run_number }}-Linux.deb")
+          assets+=("-a" "02-homework/build/ip_filter-0.0.${{ github.run_number }}-Linux.deb")
+          tag_name="${GITHUB_REF##*/}"
+          hub release create "${assets[@]}" -m "$tag_name" "$tag_name"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./02-homework/build/ip_filter-0.0.${{ github.run_number }}-Linux.deb
-          asset_name: ip_filter-0.0.${{ github.run_number }}-Linux.deb
-          asset_content_type: application/vnd.debian.binary-package
+
+    # - name: Upload Release Asset HW2
+    #   id: upload-release-asset-2
+    #   uses: actions/upload-release-asset@v1
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #   with:
+    #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+    #     asset_path: ./02-homework/build/ip_filter-0.0.${{ github.run_number }}-Linux.deb
+    #     asset_name: ip_filter-0.0.${{ github.run_number }}-Linux.deb
+    #     asset_content_type: application/vnd.debian.binary-package
