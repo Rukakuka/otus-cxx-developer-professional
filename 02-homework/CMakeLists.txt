@@ -28,6 +28,7 @@ target_include_directories(version
 )
 
 # Describe build targets
+include_directories(include/)
 add_executable(ip_filter src/ip_filter.cpp)
 target_link_libraries(ip_filter PRIVATE
     version
