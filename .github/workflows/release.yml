@@ -9,15 +9,16 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-01-homework:
+  ci:
     runs-on: ubuntu-20.04
     permissions: write-all
     steps:
+      # 01-homework
       - uses: actions/checkout@v3
         with:
           submodules: true
       - run: |
-          cd 01-homework
+          cd /01-homework
           sudo apt-get update && sudo apt-get install cmake libboost-test-dev -y
           cmake . -DPATCH_VERSION=${{ github.run_number }}
           cmake --build .
@@ -35,21 +36,13 @@ jobs:
           release_name: Release 01-homework ${{ github.run_number }}
           draft: false
           prerelease: false
-      - name: Save built artifact
-        uses: actions/upload-artifact@master
-        with:
-          name: 01-homework-deb
-          path: ./01-homework/helloworld-0.0.${{ github.run_number }}-Linux.deb
 
-  build-02-homework:
-    runs-on: ubuntu-20.04
-    permissions: write-all
-    steps:
+      #02-homework
       - uses: actions/checkout@v3
         with:
           submodules: true
       - run: |
-          cd 02-homework
+          cd /02-homework
           sudo apt-get update && sudo apt-get install cmake libgtest-dev -y
           mkdir -p build && cd build/
           cmake -DPROJECT_REVISION=${{ github.run_number }} ../
@@ -60,7 +53,7 @@ jobs:
         name: Build
 
       - name: Create Release
-        id: create_release
+        id: create_release-02
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -69,21 +62,6 @@ jobs:
           release_name: Release 02-homework ${{ github.run_number }}
           draft: false
           prerelease: false
-      - name: Save built artifact
-        uses: actions/upload-artifact@master
-        with:
-          name: 02-homework-deb
-          path: ./02-homework/build/ip_filter-0.0.${{ github.run_number }}-Linux.deb
-
-  upload-assets:
-    runs-on: ubuntu-20.04
-    steps:
-      # - uses: actions/checkout@master
-      # - uses: actions/download-artifact@master
-      #   with:
-      #     name: 01-homework-deb
-      #     path: ./01-homework/helloworld-0.0.${{ github.run_number }}-Linux.deb
-      # - run: cat path/to/artifact/world.txt
 
       # - name: Upload Release Assets
       #   id: upload-release-assets
@@ -95,8 +73,8 @@ jobs:
       #     asset_path: ./01-homework/helloworld-0.0.${{ github.run_number }}-Linux.deb
       #     asset_name: helloworld-0.0.${{ github.run_number }}-Linux.deb
       #     asset_content_type: application/vnd.debian.binary-package
-
-      - run: |
+      - name: Release assets
+        run: |
           set -x
           assets=()
           assets+=("-a" "01-homework/helloworld-0.0.${{ github.run_number }}-Linux.deb")
