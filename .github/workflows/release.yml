@@ -28,16 +28,16 @@ jobs:
           cd ..
         name: Build
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: hw-01-${{ github.run_number }}
-          release_name: Release 01-homework ${{ github.run_number }}
-          draft: false
-          prerelease: false
+      # - name: Create Release
+      #   id: create_release
+      #   uses: actions/create-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     tag_name: hw-01-${{ github.run_number }}
+      #     release_name: Release 01-homework ${{ github.run_number }}
+      #     draft: false
+      #     prerelease: false
 
       #02-homework
       - uses: actions/checkout@v3
@@ -54,16 +54,16 @@ jobs:
           cd ..
         name: Build
 
-      - name: Create Release
-        id: create_release-02
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: hw-02-${{ github.run_number }}
-          release_name: Release 02-homework ${{ github.run_number }}
-          draft: false
-          prerelease: false
+      # - name: Create Release
+      #   id: create_release-02
+      #   uses: actions/create-release@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     tag_name: hw-02-${{ github.run_number }}
+      #     release_name: Release 02-homework ${{ github.run_number }}
+      #     draft: false
+      #     prerelease: false
 
       # - name: Upload Release Assets
       #   id: upload-release-assets
