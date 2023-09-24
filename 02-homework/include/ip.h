@@ -34,6 +34,9 @@ namespace custom
         public:
             using reference = std::vector<uint8_t>::const_reference;
             using pointer = std::vector<uint8_t>::const_pointer;
+            using value_type = std::vector<uint8_t>::value_type;
+            using difference_type = std::vector<uint8_t>::difference_type;
+            using iterator_category = std::forward_iterator_tag;
 
             reference operator*() const
             {
@@ -83,14 +86,9 @@ namespace custom
 
         bool contains(int byte)
         {
-            for (auto byte_ = this->cbegin(); byte_ != this->cend(); ++byte_)
-            {
-                if (*byte_ == byte)
-                {
-                    return true;
-                }
-            }
-            return false;
+            return std::any_of(this->cbegin(), this->cend(),
+                               [&byte](const uint8_t &__byte)
+                               { return __byte == byte; });
         }
 
         uint32_t as_num()

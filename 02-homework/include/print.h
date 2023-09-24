@@ -41,34 +41,34 @@ namespace custom
 
     void __print_single_ip(const std::vector<ip>::const_iterator &iter)
     {
-        for (auto ip_part = iter->cbegin(); ip_part != iter->cend(); ++ip_part)
+        for (auto __ippart = iter->cbegin(); __ippart != iter->cend(); ++__ippart)
         {
-            if (ip_part != iter->cbegin())
+            if (__ippart != iter->cbegin())
             {
                 std::printf(".");
             }
-            std::printf("%d", *ip_part);
+            std::printf("%d", *__ippart);
         }
         std::cout << std::endl;
     }
 
     void print(const std::vector<custom::ip> &pool)
     {
-        for (auto ip_ = pool.cbegin(); ip_ != pool.cend(); ++ip_)
+        for (auto __ip = pool.cbegin(); __ip != pool.cend(); ++__ip)
         {
-            __print_single_ip(ip_);
+            __print_single_ip(__ip);
         }
     }
 
     template <typename Compare>
     void print(const std::vector<custom::ip> &pool, Compare comp)
     {
-        for (auto ip_ = pool.cbegin(); ip_ != pool.cend(); ++ip_)
+        for (auto __ip = pool.cbegin(); __ip != pool.cend(); ++__ip)
         {
-            auto addr = *ip_;
+            auto addr = *__ip;
             if (comp(addr))
             {
-                __print_single_ip(ip_);
+                __print_single_ip(__ip);
             }
         }
     }
