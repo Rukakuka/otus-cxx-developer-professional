@@ -68,6 +68,6 @@ jobs:
             assets+=("-a" "$asset")
           done
           tag_name="${GITHUB_REF##*/}"
-          hub release create "${assets[@]}" -m "Release ${{ github.run_number }}: ${{ github.event.head_commit.message }}" "${{ github.run_number }}"
+          hub release create "${assets[@]}" -m "Release ${{ github.run_number }}: ${{ github.event.head_commit.message }}" "homework"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
