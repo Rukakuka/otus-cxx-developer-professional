@@ -79,7 +79,7 @@ jobs:
       - name: Release
         run: |
           sudo apt update && apt install -y git wget
-          sudo url="$(wget -qO- https://api.github.com/repos/github/hub/releases/latest | tr '"' '\n' | grep '.*/download/.*/hub-linux-amd64-.*.tgz')"
+          url="$(wget -qO- https://api.github.com/repos/github/hub/releases/latest | tr '"' '\n' | grep '.*/download/.*/hub-linux-amd64-.*.tgz')"
           sudo wget -qO- "$url" | tar -xzvf- -C /usr/bin --strip-components=2 --wildcards "*/bin/hub"
           sudo set -x
           assets=()
