@@ -75,9 +75,6 @@ jobs:
       # Release
       - uses: actions/download-artifact@v3
         with:
-          name: helloworld-0.0.${{ github.run_number }}-Linux.deb
-      - uses: actions/download-artifact@v3
-        with:
           name: allocator-0.0.${{ github.run_number }}-Linux.deb
       - name: Release
         run: |
