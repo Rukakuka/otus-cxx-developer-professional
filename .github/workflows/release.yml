@@ -78,10 +78,10 @@ jobs:
           name: allocator-0.0.${{ github.run_number }}-Linux.deb
       - name: Release
         run: |
-          apt update && apt install -y git wget
-          url="$(wget -qO- https://api.github.com/repos/github/hub/releases/latest | tr '"' '\n' | grep '.*/download/.*/hub-linux-amd64-.*.tgz')"
-          wget -qO- "$url" | tar -xzvf- -C /usr/bin --strip-components=2 --wildcards "*/bin/hub"
-          set -x
+          sudo apt update && apt install -y git wget
+          sudo url="$(wget -qO- https://api.github.com/repos/github/hub/releases/latest | tr '"' '\n' | grep '.*/download/.*/hub-linux-amd64-.*.tgz')"
+          sudo wget -qO- "$url" | tar -xzvf- -C /usr/bin --strip-components=2 --wildcards "*/bin/hub"
+          sudo set -x
           assets=()
           for asset in *.deb; do
             assets+=("-a" "$asset")
