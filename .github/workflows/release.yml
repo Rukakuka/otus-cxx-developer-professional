@@ -27,11 +27,6 @@ jobs:
           cmake --build . --target test
           cmake --build . --target package
           cd ..
-      - name: Save built artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: helloworld-0.0.${{ github.run_number }}-Linux.deb
-          path: ./01-homework/build/helloworld-0.0.${{ github.run_number }}-Linux.deb
 
       #02-homework
       - uses: actions/checkout@v3
@@ -47,12 +42,7 @@ jobs:
           cmake --build . --target test
           cmake --build . --target package
           cd ..
-      - name: Save built artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: ip_filter-0.0.${{ github.run_number }}-Linux.deb
-          path: ./02-homework/build/ip_filter-0.0.${{ github.run_number }}-Linux.deb
-      
+
       #03-homework
       - uses: actions/checkout@v3
         with:
@@ -65,19 +55,8 @@ jobs:
           cmake -DPROJECT_REVISION=${{ github.run_number }} ../
           cmake --build .
           cmake --build . --target package
-          cd ..
-      - name: Save built artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: allocator-0.0.${{ github.run_number }}-Linux.deb
-          path: ./03-homework/build/allocator-0.0.${{ github.run_number }}-Linux.deb
-      
+
       # Release
-
-      # - uses: actions/download-artifact@v3
-      #   with:
-      #     name: allocator-0.0.${{ github.run_number }}-Linux.deb
-
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
