@@ -78,6 +78,7 @@ jobs:
           name: allocator-0.0.${{ github.run_number }}-Linux.deb
       - name: Release
         run: |
+          sudo apt-get update && sudo apt-get install hub
           set -x
           assets=()
           for asset in *.deb; do
