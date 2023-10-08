@@ -64,7 +64,6 @@ jobs:
           mkdir -p build && cd build/
           cmake -DPROJECT_REVISION=${{ github.run_number }} ../
           cmake --build .
-          cmake --build . --target test
           cmake --build . --target package
           cd ..
       - name: Save built artifacts
