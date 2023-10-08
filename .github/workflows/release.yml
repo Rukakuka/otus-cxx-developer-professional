@@ -74,23 +74,10 @@ jobs:
       
       # Release
 
-      - uses: actions/download-artifact@v3
-        with:
-          name: allocator-0.0.${{ github.run_number }}-Linux.deb
-      # - name: Release
-      #   run: |
-      #     sudo apt update && sudo apt install -y git wget
-      #     url="$(wget -qO- https://api.github.com/repos/github/hub/releases/latest | sudo tr '"' '\n' | sudo grep '.*/download/.*/hub-linux-amd64-.*.tgz')"
-      #     sudo wget -qO- "$url" | sudo tar -xzvf- -C /usr/bin --strip-components=2 --wildcards "*/bin/hub"
-      #     assets=()
-      #     for asset in *.deb; do
-      #       assets+=("-a" "$asset")
-      #     done
-      #     tag_name="${GITHUB_REF##*/}"
-      #     echo "Release"
-      #     hub release create "${assets[@]}" -m "Release ${{ github.run_number }}: ${{ github.event.head_commit.message }}" "homework"
-        # env:
-        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - uses: actions/download-artifact@v3
+      #   with:
+      #     name: allocator-0.0.${{ github.run_number }}-Linux.deb
+
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
