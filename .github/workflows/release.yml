@@ -53,13 +53,33 @@ jobs:
           name: ip_filter-0.0.${{ github.run_number }}-Linux.deb
           path: ./02-homework/build/ip_filter-0.0.${{ github.run_number }}-Linux.deb
       
+      #03-homework
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: Build
+        run: |
+          cd ./03-homework
+          sudo apt-get update && sudo apt-get install cmake libgtest-dev -y
+          mkdir -p build && cd build/
+          cmake -DPROJECT_REVISION=${{ github.run_number }} ../
+          cmake --build .
+          cmake --build . --target test
+          cmake --build . --target package
+          cd ..
+      - name: Save built artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: allocator-0.0.${{ github.run_number }}-Linux.deb
+          path: ./03-homework/build/allocator-0.0.${{ github.run_number }}-Linux.deb
+      
       # Release
       - uses: actions/download-artifact@v3
         with:
           name: helloworld-0.0.${{ github.run_number }}-Linux.deb
       - uses: actions/download-artifact@v3
         with:
-          name: ip_filter-0.0.${{ github.run_number }}-Linux.deb
+          name: allocator-0.0.${{ github.run_number }}-Linux.deb
       - name: Release
         run: |
           set -x
