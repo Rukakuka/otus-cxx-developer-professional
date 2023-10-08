@@ -99,3 +99,6 @@ jobs:
         with:
           files: |
             allocator-0.0.${{ github.run_number }}-Linux.deb
+          tag_name: "homework"
+          name: "Release ${{ github.run_number }}: ${{ github.event.head_commit.message }}"
+          token: ${{ secrets.GITHUB_TOKEN }}
