@@ -95,7 +95,7 @@ jobs:
 
       - uses: actions/download-artifact@v3
         with:
-          name: print_ip-0.0.${{ github.run_number }}-Linux.deb
+          name: allocator-0.0.${{ github.run_number }}-Linux.deb
 
       - name: Release
         env:
