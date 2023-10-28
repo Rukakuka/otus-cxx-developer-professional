@@ -1,5 +1,0 @@
-var searchData=
-[
-  ['проверка_0',['проверка',['../md_01-homework_2README.html#autotoc_md2',1,'Проверка'],['../md_04-homework_2README.html#autotoc_md18',1,'Проверка']]],
-  ['проекта_20использован_20a_20href_20https_3a_20github_20com_20cityaplons_20cmake_20multiplatform_20template_20cmake_20multiplatform_20template_20a_1',['проекта использован a href https: github com cityaplons cmake multiplatform template cmake multiplatform template a',['../md_02-homework_2README.html#autotoc_md8',1,'В качестве темплейта проекта использован &lt;a href=&quot;https://github.com/CityAplons/cmake-multiplatform-template&quot; &gt;cmake-multiplatform-template&lt;/a&gt;.'],['../md_03-homework_2README.html#autotoc_md13',1,'В качестве темплейта проекта использован &lt;a href=&quot;https://github.com/CityAplons/cmake-multiplatform-template&quot; &gt;cmake-multiplatform-template&lt;/a&gt;.'],['../md_04-homework_2README.html#autotoc_md20',1,'В качестве темплейта проекта использован &lt;a href=&quot;https://github.com/CityAplons/cmake-multiplatform-template&quot; &gt;cmake-multiplatform-template&lt;/a&gt;.']]]
-];

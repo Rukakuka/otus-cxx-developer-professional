@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['1_0',['Задание 1',['../md_01-homework_2README.html',1,'']]]
+  ['_5f_5fprint_5fsingle_5fip_0',['__print_single_ip',['../namespacecustom.html#a665dcc5d10b9980680e665e221c0bb31',1,'custom']]]
 ];

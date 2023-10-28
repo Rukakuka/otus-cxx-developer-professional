@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['_5f_5fhas_5finclude_0',['__has_include',['../CMakeCXXCompilerId_8cpp.html#ae5510d82e4946f1656f4969911c54736',1,'CMakeCXXCompilerId.cpp']]],
-  ['_5f_5fprint_5fsingle_5fip_1',['__print_single_ip',['../namespacecustom.html#a665dcc5d10b9980680e665e221c0bb31',1,'custom']]]
+  ['deallocate_19',['deallocate',['../classcustom_1_1pool__allocator.html#a00cb665211484f89904657f8b628a3f0',1,'custom::pool_allocator']]],
+  ['destroy_20',['destroy',['../classcustom_1_1pool__allocator.html#ad314f048bbd6b63ec9104b542f0a370c',1,'custom::pool_allocator']]],
+  ['detect_21',['detect',['../structcustom_1_1impl_1_1is__iterable.html#ac304fa32ffb6fc664726b2dd822f5994',1,'custom::impl::is_iterable::detect(const U &amp;)'],['../structcustom_1_1impl_1_1is__iterable.html#a04bd6d060286d4475daf436700243c31',1,'custom::impl::is_iterable::detect(...)']]],
+  ['difference_5ftype_22',['difference_type',['../classcustom_1_1ip_1_1const__iterator.html#afe9589d2cfb14864bb3600b89edcb14e',1,'custom::ip::const_iterator::difference_type()'],['../classcustom_1_1container_1_1container__iterator.html#a9ec85b210f161783e7a8a22203e35415',1,'custom::container::container_iterator::difference_type()']]]
 ];
