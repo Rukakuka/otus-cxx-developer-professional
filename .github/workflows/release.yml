@@ -108,18 +108,22 @@ jobs:
           name: "Release ${{ github.run_number }}: ${{ github.event.head_commit.message }}"
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Doxygen Action
-        uses: mattnotmitt/doxygen-action@v1.1.0
+      # Doxy
+      - name: Checkout repository
+        uses: actions/checkout@v3
         with:
-          doxyfile-path: ./Doxyfile
-          working-directory: .
+          submodules: "true"
 
-      - name: GH Pages Deployment
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Install Doxygen
+        run: sudo apt-get install doxygen graphviz -y
+        shell: bash
+
+      - name: Generate Doxygen Documentation
+        run: doxygen Doxyfile
+        shell: bash
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4.4.3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./doc/html/
-          enable_jekyll: false
-          allow_empty_commit: false
-          force_orphan: true
-          publish_branch: gh-pages
+          branch: "gh-pages"
+          folder: "docs"
