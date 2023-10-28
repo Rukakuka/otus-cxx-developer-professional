@@ -12,19 +12,6 @@ namespace custom
 {
     namespace impl
     {
-        struct prio4
-        {
-        };
-        struct prio3 : public prio4
-        {
-        };
-        struct prio2 : public prio3
-        {
-        };
-        struct prio1 : public prio2
-        {
-        };
-
         template <typename T>
         struct is_iterable
         {
@@ -47,8 +34,8 @@ namespace custom
         {
         };
 
-        template <class T, class = std::enable_if_t<is_iterable<T>::value>>
-        void print_ip(T &container, prio1)
+        template <class T>
+        std::enable_if_t<is_iterable<T>::value> print_ip(const T &container)
         {
             if (!container.empty())
             {
@@ -60,20 +47,20 @@ namespace custom
         }
 
         template <>
-        void print_ip(std::string &str, prio1)
+        std::enable_if_t<is_iterable<std::string>::value> print_ip(const std::string &str)
         {
             std::cout << str << std::endl;
         }
 
-        template <class T, class = std::enable_if_t<is_tuple<T>::value>>
-        void print_ip(T &tuple, prio2)
+        template <class T>
+        std::enable_if_t<is_tuple<T>::value> print_ip(const T &tuple)
         {
             custom::printTuple(tuple);
             std::cout << std::endl;
         }
 
-        template <class T, class = std::enable_if_t<std::is_pod<T>::value>>
-        void print_ip(T &value, prio3)
+        template <class T>
+        std::enable_if_t<std::is_pod<T>::value> print_ip(const T &value)
         {
             size_t s = sizeof(value);
             for (size_t i = s; i > 0; i--)
@@ -86,35 +73,17 @@ namespace custom
             }
             std::cout << std::endl;
         }
-
-        template <>
-        void print_ip(const char *&str, prio3)
-        {
-            std::cout << str << std::endl;
-        }
-
-        template <typename T>
-        void print_ip(T &value, prio4)
-        {
-            std::cout << value << std::endl;
-        }
-
     }
 
     template <typename T>
-    void print_ip(T v)
+    void print_ip(const T& v)
     {
-        impl::print_ip(v, impl::prio1{});
+        impl::print_ip(v);
     }
-
 }
 
-int main(int argc, char const *argv[])
+int main()
 {
-
-    (void)argc;
-    (void)argv;
-
     try
     {
         std::string s;
@@ -127,8 +96,6 @@ int main(int argc, char const *argv[])
         print_ip(std::vector<int>{100, 200, 300, 400});
         print_ip(std::list<short>{400, 300, 200, 100});
         print_ip(std::make_tuple(123, 456, 789, 0));
-
-        // custom::print_ip("Hello, world!");
     }
     catch (const std::exception &e)
     {
