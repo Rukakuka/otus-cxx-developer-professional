@@ -121,4 +121,5 @@ jobs:
           publish_dir: ./doc/html/
           enable_jekyll: false
           allow_empty_commit: false
-          publish_branch: main
+          force_orphan: true
+          publish_branch: gh-pages
