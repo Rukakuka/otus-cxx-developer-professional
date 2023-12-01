@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['main_129',['main',['../main_8cpp.html#a2c3f6775325c30275d11c6abee2db6a0',1,'main(int, char **):&#160;main.cpp'],['../ip__filter_8cpp.html#abf9e6b7e6f15df4b525a2e7705ba3089',1,'main(int argc, char const *argv[]):&#160;ip_filter.cpp'],['../allocator_8cpp.html#abf9e6b7e6f15df4b525a2e7705ba3089',1,'main(int argc, char const *argv[]):&#160;allocator.cpp'],['../print__ip_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;print_ip.cpp']]]
+  ['info_192',['Info',['../classcustom_1_1Logger.html#ac5e2e5b3a84bf5dacf30c83c23227732',1,'custom::Logger']]],
+  ['ip_193',['ip',['../classcustom_1_1ip.html#add960e78de2cf326c18ce477b64a7c55',1,'custom::ip']]]
 ];

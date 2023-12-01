@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['_7econtainer_148',['~container',['../classcustom_1_1container.html#a134dfc1f80f4a3bda61315c8bd46f0a9',1,'custom::container']]],
-  ['_7eip_149',['~ip',['../classcustom_1_1ip.html#a83b6f5491f7ed50809d584b5431117c4',1,'custom::ip']]],
-  ['_7epool_5fallocator_150',['~pool_allocator',['../classcustom_1_1pool__allocator.html#ae8923ed5dd6e8907a19811703439e22e',1,'custom::pool_allocator']]]
+  ['save_214',['Save',['../classcustom_1_1Document.html#a62cea9be861f49e6ad84cf260cbc29c3',1,'custom::Document']]],
+  ['scale_215',['Scale',['../classcustom_1_1GraphicalPrimitive.html#a9b0b324761ae4da80fb6ad1619f0d464',1,'custom::GraphicalPrimitive']]],
+  ['size_216',['size',['../classcustom_1_1container.html#a4a29b7522cfb2dcf6cf612c1a7584479',1,'custom::container']]],
+  ['split_217',['split',['../namespacecustom.html#a79be1e2d28d3f2380ee7d7cc16e40af3',1,'custom']]]
 ];

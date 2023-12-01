@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['version_147',['version',['../lib_8cpp.html#ae64f17a84dc9c7144d1036498ff26fd9',1,'version():&#160;lib.cpp'],['../lib_8h.html#ae64f17a84dc9c7144d1036498ff26fd9',1,'version():&#160;lib.cpp']]]
+  ['removeobject_213',['RemoveObject',['../classcustom_1_1IDatabase.html#a0cfd8b75ed7021990cac51735881c406',1,'custom::IDatabase::RemoveObject()'],['../classcustom_1_1Database.html#ab82b237d87c99742f2e74027b6f8120a',1,'custom::Database::RemoveObject()']]]
 ];

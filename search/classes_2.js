@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['pool_5fallocator_89',['pool_allocator',['../classcustom_1_1pool__allocator.html',1,'custom']]],
-  ['projectinfo_90',['ProjectInfo',['../structProjectInfo.html',1,'']]]
+  ['database_130',['Database',['../classcustom_1_1Database.html',1,'custom']]],
+  ['document_131',['Document',['../classcustom_1_1Document.html',1,'custom']]]
 ];
